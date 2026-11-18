@@ -209,9 +209,8 @@
   function nextPuzzle() { level += 1; newPuzzle(); toast(`Level ${level} - good luck!`); }
   function hint() {
     if (won || lost) return;
-    const base = goalBase();
     let candidates = [];
-    for (const value of [base, ...[...new Set(cells.filter(v => v > 0n && v < base).map(String))].map(BigInt)]) {
+    for (let value = target / 2n; value >= 2n; value /= 2n) {
       const matches = cells.map((v, i) => v === value ? i : -1).filter(i => i >= 0);
       if (matches.length >= 2) { candidates = matches.slice(0, 2); break; }
     }
