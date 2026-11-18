@@ -84,7 +84,7 @@ private fun NumbercraftApp() {
     var puzzle by remember(level) { mutableStateOf(makePuzzle(level)) }
     val tokens = remember {
         mutableStateListOf<EquationToken>().apply {
-            decodeTokens(prefs.getString("equation", "").orEmpty(), makePuzzle(level)).forEach(::add)
+            decodeTokens(prefs.getString("equation", "").orEmpty(), makePuzzle(level)).forEach { add(it) }
         }
     }
 
