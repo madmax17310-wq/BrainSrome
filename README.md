@@ -10,7 +10,7 @@ Open `index.html` in a modern browser. Match equal tiles, make the goal before t
 
 ## Numbercraft for Android
 
-A child-friendly arithmetic puzzle game designed for roughly ages 7-12. Use all four number tiles and three operations to make the target. Every level is generated with a valid solution. Hints teach order of operations, and encouraging feedback rewards persistence.
+A child-friendly math puzzle app designed for roughly ages 7-12. It has 10 distinct games: Target Builder, Number Sequence, Times Tables, Number Bonds, Fraction Finder, Shape Sequence, Odd One Out, Place Value, Balance Beam, and Number Riddle. Each game has its own saved progress and endless levels. Hints teach, and feedback encourages another try.
 
 Open the `android` folder in Android Studio. It uses JDK 17, Gradle 9.6.0, and Android SDK Platform 37. The app works offline and saves progress on the device. It requests no network permission and includes no ads, account sign-in, or analytics SDK.
 
