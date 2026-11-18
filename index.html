@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101729">
+  <title>Mergebound â€” Infinite Puzzle</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101729;--panel:#19233a;--panel2:#202d48;--ink:#f4f6ff;--muted:#a5b0c8;--mint:#92f3ce;--gold:#ffd27b;--line:#34425f}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#2e4168 0,transparent 55%),var(--bg);color:var(--ink);font:16px/1.5 ui-rounded,"Segoe UI",system-ui,sans-serif;display:grid;place-items:center;padding:24px}
+    main{width:min(100%,900px)}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.brand{display:flex;gap:12px;align-items:center}.mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,var(--mint),#61c8e7);display:grid;place-items:center;color:#132139;font-size:24px;font-weight:900;box-shadow:0 7px 22px #74e6cc44}.eyebrow{text-transform:uppercase;letter-spacing:.16em;color:var(--mint);font-size:11px;font-weight:800}.brand h1{font-size:21px;margin:0}.sound{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 13px;border-radius:12px;cursor:pointer}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px}.game,.side{background:#161f33dd;border:1px solid #ffffff12;border-radius:22px;box-shadow:0 20px 60px #05091455}.game{padding:clamp(16px,4vw,30px)}.stats{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.level-label{font-size:13px;color:var(--muted)}.level-num{font-size:25px;font-weight:850;letter-spacing:-.04em}.target{background:#222e47;border:1px solid #ffffff0b;border-radius:14px;padding:8px 13px;text-align:right}.target small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}.target strong{color:var(--gold);font-size:19px}
+    .board{display:grid;gap:9px;aspect-ratio:1;width:min(100%,520px);margin:0 auto;background:#10182a;padding:10px;border-radius:19px;border:1px solid #ffffff10;touch-action:manipulation}.cell{border:0;border-radius:12px;background:#202b42;color:#e9efff;font-weight:800;font-size:clamp(16px,4vw,30px);cursor:pointer;transition:transform .12s,background .12s,box-shadow .12s;box-shadow:inset 0 1px #ffffff09}.cell:hover{background:#2a3854;transform:translateY(-1px)}.cell:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.cell.filled{background:#30425f;color:#fff}.cell.v2{background:#285b61;color:#d3fff2}.cell.v4{background:#378377;color:#e7fff2}.cell.v8{background:#b27b39;color:#fff4d9}.cell.v16{background:#bd6346;color:#fff2e8}.cell.v32,.cell.v64,.cell.v128{background:#955272;color:#fff0f7}.cell.selected{outline:3px solid var(--mint);outline-offset:-4px;box-shadow:0 0 18px #92f3ce55}.cell.pulse{animation:pop .2s ease}@keyframes pop{50%{transform:scale(.9)}}
+    .controls{display:flex;gap:10px;justify-content:center;margin-top:17px}.action{border:0;border-radius:13px;padding:12px 16px;font-weight:750;cursor:pointer;transition:transform .15s,filter .15s}.action:hover{transform:translateY(-1px);filter:brightness(1.08)}.primary{background:var(--mint);color:#102438;flex:1;max-width:210px}.secondary{background:#27344e;color:var(--ink);border:1px solid #ffffff12}.note{text-align:center;color:var(--muted);font-size:12px;margin:13px 0 0}.side{padding:22px;display:flex;flex-direction:column;gap:17px}.side h2{font-size:16px;margin:0}.side p{margin:0;color:var(--muted);font-size:13px}.rule{display:flex;gap:10px;align-items:flex-start}.bubble{flex:0 0 25px;height:25px;display:grid;place-items:center;border-radius:8px;background:#25344e;color:var(--mint);font-size:12px;font-weight:900}.divider{height:1px;background:#ffffff12}.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.track{height:7px;border-radius:10px;background:#27344e;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--mint),#72c9eb);width:0%;transition:width .3s}.best{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.best strong{color:var(--ink)}.toast{position:fixed;inset:auto 20px 24px;display:flex;justify-content:center;pointer-events:none}.toast span{background:#edf8f4;color:#12223b;border-radius:14px;padding:12px 18px;font-weight:800;box-shadow:0 8px 30px #0005;transform:translateY(90px);opacity:0;transition:.25s}.toast.show span{transform:translateY(0);opacity:1}.win{color:var(--mint)}
+    @media(max-width:700px){body{padding:14px}.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;padding:17px;gap:13px}.side h2,.side .divider,.side .progress-wrap{grid-column:1/-1}.brand h1{font-size:18px}.board{gap:7px;padding:8px}.cell{border-radius:9px}.game{padding:17px}}
+  </style>
+</head>
+<body>
+<main>
+  <header><div class="brand"><div class="mark">â†—</div><div><div class="eyebrow">Endless puzzle</div><h1>Mergebound</h1></div></div><button class="sound" id="soundBtn" aria-label="Toggle sound">â™ª Sound off</button></header>
+  <div class="layout">
+    <section class="game" aria-label="Puzzle game">
+      <div class="stats"><div><div class="level-label">CURRENT PUZZLE</div><div class="level-num">Level <span id="level">1</span></div></div><div class="target"><small>Make this tile</small><strong id="target">16</strong></div></div>
+      <div id="board" class="board" role="grid" aria-label="Merge puzzle board"></div>
+      <div class="controls"><button class="action secondary" id="undo">â†¶ Undo</button><button class="action secondary" id="restart">â†» Restart</button><button class="action primary" id="next" hidden>Next puzzle â†’</button></div>
+      <p class="note">Pick two equal tiles to merge Â· <kbd>1</kbd> then <kbd>2</kbd> also works</p>
+    </section>
+    <aside class="side"><h2>How to play</h2><div class="rule"><span class="bubble">1</span><p>Select two tiles with the same number.</p></div><div class="rule"><span class="bubble">2</span><p>They merge into the next number. Keep merging to reach the goal.</p></div><div class="rule"><span class="bubble">3</span><p>Clear the goal tile to unlock your next puzzle. The board keeps growing!</p></div><div class="divider"></div><div class="progress-wrap"><div class="progress-label"><span>Goal progress</span><span id="progressText">0 / 16</span></div><div class="track"><div class="fill" id="progress"></div></div></div><div class="best"><span>Best level</span><strong id="best">1</strong></div><div class="best"><span>Merges</span><strong id="moves">0</strong></div></aside>
+  </div>
+</main><div class="toast" id="toast"><span id="toastText"></span></div>
+<script>
+(() => {
+  const $=id=>document.getElementById(id), boardEl=$('board');
+  let level=1, size=4, target=16, cells=[], selected=[], history=[], moves=0, won=false, sound=false, audio;
+  const bestSaved=Number(localStorage.getItem('mergebound-best')||1);
+  $('best').textContent=bestSaved;
+  function config(){size=Math.min(4+Math.floor((level-1)/3),7);target=16*Math.pow(2,Math.floor((level-1)/2));}
+  function newBoard(){config();moves=0;won=false;selected=[];history=[];cells=Array(size*size).fill(0);const base=target/4;let values=[base,base,base,base,base/2,base/2,base/4,base/4];let count=Math.min(values.length,Math.floor(cells.length*.52));for(let i=0;i<count;i++){let spot;do{spot=Math.floor(Math.random()*cells.length)}while(cells[spot]);cells[spot]=values[i]||2}render();$('next').hidden=true;$('undo').disabled=true;$('level').textContent=level;$('target').textContent=target;$('moves').textContent='0';updateProgress()}
+  function render(){boardEl.style.gridTemplateColumns=`repeat(${size},1fr)`;boardEl.innerHTML='';cells.forEach((v,i)=>{const b=document.createElement('button');b.className='cell'+(v?' filled v'+Math.min(v,128):'')+(selected.includes(i)?' selected':'');b.setAttribute('role','gridcell');b.setAttribute('aria-label',v?`${v}, cell ${i+1}`:`Empty, cell ${i+1}`);b.textContent=v||'';b.onclick=()=>pick(i);boardEl.appendChild(b)})}
+  function save(){history.push({cells:[...cells],moves});if(history.length>30)history.shift();$('undo').disabled=false}
+  function pick(i){if(won)return;if(!cells[i]){selected=[];render();return}if(!selected.length){selected=[i];render();return}if(selected[0]===i){selected=[];render();return}if(cells[selected[0]]!==cells[i]){selected=[i];render();toast('Choose a matching tile');return}save();const v=cells[i]*2;cells[i]=v;cells[selected[0]]=0;moves++;selected=[];play();render();$('moves').textContent=moves;updateProgress();if(v>=target)win()}
+  function updateProgress(){let highest=Math.max(0,...cells);$('progressText').textContent=`${Math.min(highest,target)} / ${target}`;$('progress').style.width=`${Math.min(100,highest/target*100)}%`}
+  function win(){won=true;const best=Math.max(bestSaved,level);localStorage.setItem('mergebound-best',best);$('best').textContent=best;$('next').hidden=false;toast('Puzzle solved! âœ¨');}
+  function toast(text){$('toastText').textContent=text;$('toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').classList.remove('show'),1700)}
+  function play(){if(!sound)return;try{audio ||= new(window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.frequency.value=520;o.type='sine';g.gain.setValueAtTime(.08,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.12);o.start();o.stop(audio.currentTime+.12)}catch{}}
+  $('undo').onclick=()=>{const prev=history.pop();if(!prev)return;cells=prev.cells;moves=prev.moves;won=false;selected=[];render();$('moves').textContent=moves;$('next').hidden=true;$('undo').disabled=!history.length;updateProgress()};
+  $('restart').onclick=()=>newBoard();$('next').onclick=()=>{level++;newBoard()};$('soundBtn').onclick=()=>{sound=!sound;$('soundBtn').textContent=sound?'â™« Sound on':'â™ª Sound off';if(sound)play()};
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){selected=[];render()}if(e.key==='1'||e.key==='2'){const empty=cells.map((v,i)=>v?i:-1).filter(i=>i>=0);if(empty.length){const i=empty[Math.floor(Math.random()*empty.length)];pick(i)}}});
+  newBoard();
+})();
+</script>
+</body>
+</html>
+
