@@ -1,6 +1,6 @@
 # Numbercraft for Android
 
-Numbercraft is a child-friendly arithmetic puzzle game for Android. It is designed for roughly ages 7-12 and uses large touch controls, encouraging feedback, and progressively harder target puzzles.
+Numbercraft is a child-friendly math puzzle app for Android, designed for roughly ages 7-12. It includes ten different puzzle games, large touch controls, encouraging feedback, and endless levels for each game.
 
 ## Open in Android Studio
 
@@ -8,9 +8,9 @@ Open this `android` folder as a project in Android Studio. Install JDK 17, Gradl
 
 ## How to play
 
-Use each of the four number tiles once and place three operations between them to reach the target. Multiplication and division happen before addition and subtraction. Hints explain that rule; they do not reveal the answer. Each generated level has a valid solution.
+Choose among Target Builder, Number Sequence, Times Tables, Number Bonds, Fraction Finder, Shape Sequence, Odd One Out, Place Value, Balance Beam, and Number Riddle. Each game gets its own progress and infinite stream of puzzles.
 
-The first puzzle is `2`, `3`, `5`, and `7`, with a target of `24`. Later puzzles use larger numbers. Progress, score, stars, and the current equation are saved on the device.
+Target Builder starts with ten curated puzzles, then generates new ones endlessly. The other games also generate new questions as levels increase. Progress, score, stars, and the current equation are saved on the device.
 
 ## Privacy
 
