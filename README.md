@@ -1,22 +1,18 @@
-# BrainSrome
-It's multiple puzzle game with extraordinary visual effect
+# BrainSrome Puzzle Collection
 
-## Play
+A small collection of colorful, offline-friendly puzzle games.
 
-Open `index.html` in a modern browser, or enable GitHub Pages for this repository to host it as a website.
+## Mergebound
 
-## Rules
+An endless number-merging puzzle that runs in a browser with no build step or dependencies.
 
-1. Select any numbered tile.
-2. Select another tile with the same value to merge them into one tile worth twice as much.
-3. Make the gold target tile before the move limit runs out.
-4. Continue through endlessly generated levels. Boards grow from 4x4 to 7x7, targets keep scaling, and move budgets tighten.
+Open `index.html` in a modern browser. Match equal tiles, make the goal before the move limit runs out, and continue through increasingly challenging levels. Use Hint, Undo, and Restart as needed. Progress, score, best level, and stars save in the browser.
 
-Use **Hint** to highlight a matching pair, **Undo** to restore a previous move, and **Restart** to replay the same puzzle. Progress, score, best level, and stars save in the browser.
+## Numbercraft for Android
 
-## Controls
+A child-friendly arithmetic puzzle game designed for roughly ages 7-12. Use all four number tiles and three operations to make the target. Every level is generated with a valid solution. Hints teach order of operations, and encouraging feedback rewards persistence.
 
-- Mouse or touch: select tiles and buttons.
-- Keyboard: Tab to the board, arrows to move between cells, Enter or Space to select, Escape to clear a selection.
-- Sound can be toggled in the header.
+Open the `android` folder in Android Studio. It uses JDK 17, Gradle 9.6.0, and Android SDK Platform 37. The app works offline and saves progress on the device. It requests no network permission and includes no ads, account sign-in, or analytics SDK.
+
+See [android/README.md](android/README.md) for build setup and play details.
 
